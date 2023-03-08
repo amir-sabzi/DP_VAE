@@ -1,4 +1,5 @@
 {
+  "experiment": "test",
   "data_dir": "/tmp/data",
   "dataset": "MNIST",
   "decoder_output_dim": 784,
@@ -8,8 +9,11 @@
   "decoder_model": "mlp",
   "activation": "relu",
   "vae_batch_size": 32,
-  "vae_epochs": 10,
+  "vae_epochs": 100,
   "vae_model": "VAE_simple",
-  "vae_loss": "ELBO"
+  "vae_loss": "elbo_continuous",
+  "vae_lr" : 0.01,
+
+  "results_dir": "./resutls/"
   
 }

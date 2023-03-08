@@ -10,7 +10,8 @@ class DecoderMLP(MainModel):
         batch_size = x.shape[0]
         out_dim_l1 = 300
         out_dim_l2 = 500
-        print_shapes=True
+        max_var = 10
+        print_shapes=False
 
         # Dense layer 1
         if print_shapes: print(x.shape)
@@ -24,10 +25,15 @@ class DecoderMLP(MainModel):
         
         # Reconstruction layer
         if print_shapes: print(x.shape)
-        x = hk.Linear(self.decoder_output_dim, name="fc_final")(x)
-        x = self.activation(x)  
 
-        x = x.reshape(batch_size, -1) 
-        return x
+        means_x = hk.Linear(self.decoder_output_dim, name="fc_final_means")(x)
+        # means_x = jax.nn.tanh(means_x)
+
+        logvars_x = hk.Linear(self.decoder_output_dim, name="fc_final_logvars")(x)
+        logvars_x = jax.nn.tanh(logvars_x) * 10 
+
+        means_x = means_x.reshape(batch_size, -1) 
+        logvars_x = logvars_x.reshape(batch_size, -1) 
+        return means_x, logvars_x
 
 

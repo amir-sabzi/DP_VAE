@@ -18,8 +18,8 @@ class Model(hk.Module):
         batch_size = x.shape[0]
         means, logvars = self.encoder(x)
         latent_vars = self.reparameterize(batch_size, latents_rng, means, logvars)
-        recon_x = self.decoder(latent_vars)
-        return recon_x, means, logvars
+        # recon_means_x, recon_logvars_x = self.decoder(latent_vars)
+        return *self.decoder(latent_vars), means, logvars
         
         
     def reparameterize(self, batch_size, latent_rng, means, logvars):

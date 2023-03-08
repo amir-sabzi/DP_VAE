@@ -35,9 +35,6 @@ def parse(config: Config = None, save_fname: str = "") -> Dict[str, Any]:
         config = Config()
 
     args = parser.parse_args()
-    if "train_vae" in args and args.train_vae:
-        print("cached")
-        print(args.train_vae)
     if "load_json" in args and args.load_json:
         # Load json config if there is one.
         with open(args.load_json, 'rt') as f:
