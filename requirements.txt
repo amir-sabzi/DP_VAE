@@ -1,0 +1,11 @@
+numpy
+jax
+dm_haiku
+jaxlib
+torch
+torchvision
+matplotlib
+tqdm
+requests
+optax
+
